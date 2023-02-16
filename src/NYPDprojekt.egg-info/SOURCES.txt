@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+src/NYPDprojekt/__init__.py
+src/NYPDprojekt/analiza.py
+src/NYPDprojekt.egg-info/PKG-INFO
+src/NYPDprojekt.egg-info/SOURCES.txt
+src/NYPDprojekt.egg-info/dependency_links.txt
+src/NYPDprojekt.egg-info/requires.txt
+src/NYPDprojekt.egg-info/top_level.txt

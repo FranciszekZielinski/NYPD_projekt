@@ -1,6 +1,6 @@
 import pandas as pd
 import argparse
-import analiza
+from src import analiza
 
 parser = argparse.ArgumentParser()
 

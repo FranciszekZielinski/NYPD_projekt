@@ -47,9 +47,17 @@ def drop_years(df,common_years):
 
 
 def top_emitters(df):
+    if 'Year' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'Year' column.")
+    if 'Country Name' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'Country Name' column.")
+    if 'co2' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'co2' column.")
+    if 'population' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'population' column.")
     df['co2_per_capita'] = df['co2'] / df['population']
 
-    grouped = df.groupby('Year').apply(lambda x: x.sort_values('co2_per_capita', ascending=False))
+    grouped = df.groupby('Year', group_keys=True).apply(lambda x: x.sort_values('co2_per_capita', ascending=False))
     grouped = grouped.drop('Year', axis=1)
     top5 = grouped.groupby('Year').head(5)
 
@@ -61,9 +69,17 @@ def top_emitters(df):
 
 
 def top_richess(df):
+    if 'Year' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'Year' column.")
+    if 'Country Name' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'Country Name' column.")
+    if 'gdp' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'gdp' column.")
+    if 'population' not in df.columns:
+        raise ValueError("Input DataFrame does not contain a 'population' column.")
     df['gdp_per_capita'] = df['gdp'] / df['population']
 
-    grouped = df.groupby('Year').apply(lambda x: x.sort_values('gdp_per_capita', ascending=False))
+    grouped = df.groupby('Year', group_keys=True).apply(lambda x: x.sort_values('gdp_per_capita', ascending=False))
     grouped = grouped.drop('Year', axis=1)
     top5 = grouped.groupby('Year').head(5)
 

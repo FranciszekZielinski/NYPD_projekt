@@ -67,11 +67,11 @@ new_merged_df = pd.merge(merged_df,co2 , on=['Country Name', 'Year'])
 new_merged_df = new_merged_df.reset_index(drop = True)
 
 
-analiza.top_richess(new_merged_df)
+print(analiza.top_richess(new_merged_df))
 
 
 
-analiza.top_emitters(new_merged_df)
+print(analiza.top_emitters(new_merged_df))
 
 
-analiza.change_in_emission(new_merged_df)
+print(analiza.change_in_emission(new_merged_df))

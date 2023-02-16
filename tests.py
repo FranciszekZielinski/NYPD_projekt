@@ -1,6 +1,6 @@
 import unittest
 import pandas as pd
-from analiza import top_emitters, change_in_emission
+from src import analiza
 
 class Test(unittest.TestCase):
     def test_top_emitters(self):
@@ -10,7 +10,7 @@ class Test(unittest.TestCase):
                 'population': [10, 20, 30, 40, 50, 60]}
         df = pd.DataFrame(data)
 
-        result = top_emitters(df)
+        result = analiza.top_emitters(df)
 
         self.assertEqual(result.shape, (6, 3))
 
@@ -24,7 +24,7 @@ class Test(unittest.TestCase):
                 'population': [10, 20, 30, 40, 50, 60]}
         df = pd.DataFrame(data)
 
-        result = top_emitters(df)
+        result = analiza.top_emitters(df)
 
         self.assertEqual(result.shape, (6, 3))
 
@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
                 'population': [10, 20, 15, 25, 5, 10]}
         df = pd.DataFrame(data)
 
-        result = change_in_emission(df)
+        result = analiza.change_in_emission(df)
 
         # Define the expected output
         expected_result = pd.DataFrame({'first': [10.0, 10, 10],

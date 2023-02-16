@@ -8,6 +8,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('co2_file', type=str, help='CSV file containing CO2  data')
 parser.add_argument('population_file', type=str, help='CSV file containing population data')
 parser.add_argument('gdp_file', type=str, help='CSV file containing GDP data')
+parser.add_argument('-start', help='starting year', type=int)
+parser.add_argument('-end', help='ending year', type=int)
 
 args = parser.parse_args()
 
@@ -15,13 +17,23 @@ args = parser.parse_args()
 gdp_file = args.gdp_file
 population_file = args.population_file
 CO2_file = args.co2_file
+start = args.start
+end = args.end
+
+interval = list(range(start, end+1))
+interval = list(map(str, interval))
+
 
 
 gdp = pd.read_csv(gdp_file,skiprows=4)
 population = pd.read_csv(population_file,skiprows=4)
 co2 = pd.read_csv(CO2_file)
 
+gdp = analiza.drop_years(gdp,interval)
 
+digit_cols = [col for col in gdp.columns if str(col).isdigit()]
+if len(digit_cols) == 0:
+    raise Exception('No data in the specified date range')
 
 analiza.drop_columns(gdp,population)
 

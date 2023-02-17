@@ -20,8 +20,8 @@ CO2_file = args.co2_file
 start = args.start
 end = args.end
 
-interval = list(range(start, end+1))
-interval = list(map(str, interval))
+
+
 
 
 
@@ -29,11 +29,6 @@ gdp = pd.read_csv(gdp_file,skiprows=4)
 population = pd.read_csv(population_file,skiprows=4)
 co2 = pd.read_csv(CO2_file)
 
-gdp = analiza.drop_years(gdp,interval)
-
-digit_cols = [col for col in gdp.columns if str(col).isdigit()]
-if len(digit_cols) == 0:
-    raise Exception('No data in the specified date range')
 
 analiza.drop_columns(gdp,population)
 
@@ -44,6 +39,17 @@ gdp = analiza.digits_columns_to_int(gdp)
 population = analiza.digits_columns_to_int(population)
 
 years = analiza.select_same_years(co2,population,gdp)
+if start and end:
+    interval = list(range(start, end+1))
+    gdp = analiza.drop_years(gdp,interval)
+else: gdp = analiza.drop_years(gdp,years)
+
+
+
+digit_cols = [col for col in gdp.columns if str(col).isdigit()]
+if len(digit_cols) == 0:
+    raise Exception('No data in the specified date range')
+
 
 co2 = analiza.drop_years(co2, years)
 

@@ -41,13 +41,11 @@ class Test(unittest.TestCase):
 
         result = analiza.change_in_emission(df)
 
-        # Define the expected output
         expected_result = pd.DataFrame({'first': [10.0, 10, 10],
                                         'last': [10.0, 10, 10],
                                         'change': [0.0, 0.0, 0.0]},
                                         index=['A', 'B', 'C'])
         expected_result.index.name = 'Country Name'
-        # Compare the actual and expected output
         self.assertTrue(result.equals(expected_result))
 
 
